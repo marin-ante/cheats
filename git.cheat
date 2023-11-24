@@ -1,0 +1,65 @@
+% git
+
+$ file_tracked_by_git: git ls-tree -r master --name-only
+$ pull_request_number: gh pr list --- --column 1 --delimiter '\t'
+
+# Bring a Github fork up to date
+git fetch origin
+git checkout master
+git merge origin/master
+
+# Check out a forked branch
+gh pr checkout <pull_request_number>
+
+# git log short format
+git log --pretty=format:"%h%x09%an%x09%ad%x09%s"
+
+# copy latest commit sha1
+git rev-parse --short HEAD | tr -d '\n' | xc
+
+# reset a git file to master branch
+git reset origin/master -- <file>
+$ file: git diff origin/master --name-only
+
+# show the diff of a git commit
+git show <commit>
+$ commit: git oneline --- --column 1 --delimiter '\s\s+'
+
+# check if a file is checked in / track in git
+git ls-files --error-unmatch <file>
+$ file: fd . -uu --exclude=.venv --exclude=.mypy_cache --exclude=.git
+
+# copy the git branch to the clipboard
+git branch --show-current | tr -d '\n' | xclip -selection clipboard
+
+# diff file from origin/master
+git diff origin/master -- <file_diff_master>
+$ file_diff_master: git diff --name-only origin/master
+
+# get the short git sha1 commit hash
+git rev-parse --short HEAD
+
+# get the long git sha1 commit hash
+git rev-parse HEAD
+
+# git format patch create git patch files
+git format-patch $(echo <commit> | sed "s/ .*//")
+$ commit: git log --color=always --pretty=oneline --abbrev-commit --- --tac +s -m -e --ansi --reverse
+
+# git remove untracked files, warning: destructive operation
+git clean -f -d
+
+# git search for text in the commit log. grep
+git log --all --grep='Build 0051'
+
+# show all commits that touched / changes a git file
+git log --follow -- <file_tracked_by_git>
+
+# show all contributors for a folder or file
+git shortlog -n -s -- config/
+
+# show the history for a file
+git log -p -- <file_tracked_by_git>
+
+# Git rebase to the first root commit
+git rebase --root -i
