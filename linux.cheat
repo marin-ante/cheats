@@ -1,0 +1,59 @@
+% linux
+
+# list systemd services
+systemctl list-units --type=service
+
+# show logs for a systemd service
+sudo journalctl -u <systemd_services>
+$ systemd_services: systemctl list-units --type=service --- --column 2 --delimiter '\s\s+'
+
+# flush systemd DNS cache
+sudo resolvectl flush-caches
+
+# systemd restart network networkmanager
+sudo systemctl restart NetworkManager.service
+
+# Watch subshells spawned by a shell
+watch pstree -halp 40931
+
+# Set up an ssh tunnel to a server
+ssh -N -L 8443:localhost:8443 web-staging
+
+# Create a new ssh key
+ssh-keygen -t ed25519 -C "your_email@example.com"
+
+# Create a new unencrypted SSH key
+ssh-keygen -t ed25519
+
+# Read contents of private key
+openssl rsa -noout -text -in <PRIVATE_KEY>
+
+# Read contents of certificate
+openssl x509 -noout -text -in <CERTIFICATE>
+
+# Decrypt a private ssh key file
+openssl rsa -in ~/.ssh/id_rsa
+  
+# Diff two files and show special characters
+diff file1 file2 | cat -t
+
+# Diff two files side by side
+diff file1 file2 | cat -t
+
+# Replace all occurances of a word in a folder
+find . -type f -name "*.txt" -print0 | xargs -0 sed -i "s/foo/bar/g"
+
+# Copy files recursively between two local direcories
+rsync -avzh source dest
+
+# Lookup SRV record
+dig +short drone-github-web.service.consul SRV
+
+# Lookup record using specific name server
+dig @<name_server> +short NS <domain>
+$ name_server: ashton.ns.cloudflare.com
+$ domain: domain.com
+
+# list files and binaries and paths contained in an apt package
+apt-file list openjdk-11-jdk
+
