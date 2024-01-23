@@ -18,7 +18,7 @@ aws ec2 describe-images --filters 'Name=name,Values=ubuntu/images/hvm-ssd/ubuntu
 aws ec2 describe-instances --region=eu-west-1 --query 'Reservations[*].Instances[*].[VpcId, InstanceId, PublicIpAddress, Placement.AvailabilityZone, State.Name]' --output text
 
 # Connect to EC2 instance using ssh-instance-connect. Transfer key to EC2 instance server
-aws ec2-instance-connect send-ssh-public-key --instance-id <instance> --ssh-public-key file:///home/dani/.ssh/id_rsa.pub --instance-os-user ubuntu
+aws ec2-instance-connect send-ssh-public-key --instance-id <instance> --ssh-public-key file:///home//elliot/id_rsa.pub --instance-os-user ubuntu
 ssh ubuntu@<instance_ip>
 
 # Delete an ec2 instance

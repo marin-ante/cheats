@@ -2,3 +2,6 @@
 
 # Remove all running containers
 docker rm $(docker ps --filter status=running -q) -f
+
+# Prune everything (eg. images, containers, networks)
+docker system prune -a
